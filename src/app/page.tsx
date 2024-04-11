@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main>
       <h1>Games</h1>
-      <div>
+      <div style={{ display: 'flex', gap: '1rem' }}>
         {topGames?.map(({ name, cover }) => (
           <GameCard key={name} name={name} imageUrl={cover?.url ?? ''} />
         ))}
