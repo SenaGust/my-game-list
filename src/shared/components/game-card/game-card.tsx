@@ -1,14 +1,34 @@
+'use client';
 import Image from 'next/image';
 import { GameCardProps } from './game-card.types';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
 
 export function GameCard({ imageUrl, name }: GameCardProps) {
   const imageSrc = imageUrl?.replace('//', 'https://').replace('thumb', '720p');
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div style={{ width: 'fit-content' }}>
-      <motion.div whileHover={{ scale: 1.05 }}>
-        <img alt={name} src={imageSrc} />
-        <p>{name}</p>
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        onHoverStart={() => setIsOpen(true)}
+        onHoverEnd={() => setIsOpen(false)}
+      >
+        <Image alt={name} src={imageSrc} height={720} width={540} priority={false} />
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className="accordion-content"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {name}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </div>
   );
