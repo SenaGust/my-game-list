@@ -19,14 +19,9 @@ export function GameCard({ imageUrl, name }: GameCardProps) {
 
         <AnimatePresence>
           {isOpen && (
-            <motion.div
-              className="accordion-content"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
+            <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               {name}
-            </motion.div>
+            </motion.h3>
           )}
         </AnimatePresence>
       </motion.div>
